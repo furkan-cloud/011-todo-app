@@ -5,27 +5,57 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
+const list = ['ali', 'baba'];
+
 const App = (props) => {
   const [counter, setCounter] = useState(0);
+  const [text, setText] = useState('');
+  // const [, addItem] = useState();
+  // const updateCounter = () => setCounter(counter + 1);
+  // const addItem = () => {};
+
+  function addItem() {
+    list.push(text);
+  }
 
   return (
     <SafeAreaView style={style.container}>
       <View style={style.todoView}>
         <Text style={style.todo}>TODO</Text>
-        <Text style={style.todoCounter}>{counter}</Text>
+        <Text style={style.todoCounter}>{Apple}</Text>
       </View>
+      <ScrollView>
+        {list.map((item) => {
+          return (
+            <View>
+              <Text>{item}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
       <View style={style.addContainer}>
-        <TextInput style={style.inputContainer}></TextInput>
-        <TouchableOpacity style={style.addButton}>
+        <TextInput
+          style={style.inputContainer}
+          defaultValue={text}
+          onChangeText={(text) => setText(text)}/>
+        <TouchableOpacity
+          style={style.addButton}
+          onPress={() => {addItem();setCounter(counter + 1);}}>
           <Text style={style.textButton}>ADD TODO</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
+
+// onPress={() => {
+//   function1();
+//   function2();
+//  }}>   
 
 export default App;
 
@@ -59,7 +89,7 @@ const style = StyleSheet.create({
     marginHorizontal: 120,
     backgroundColor: '#7e8d94',
     borderRadius: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   textButton: {
     textAlign: 'center',
