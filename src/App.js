@@ -9,11 +9,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const list = ['ali', 'baba'];
+const list = ["a", "b", "c", "d"];
 
 const App = (props) => {
   const [counter, setCounter] = useState(0);
   const [text, setText] = useState('');
+  const [, delItem] = useState();
   // const [, addItem] = useState();
   // const updateCounter = () => setCounter(counter + 1);
   // const addItem = () => {};
@@ -21,18 +22,23 @@ const App = (props) => {
   function addItem() {
     list.push(text);
   }
-
+  // list.splice(list.indexOf(item),1)
   return (
     <SafeAreaView style={style.container}>
       <View style={style.todoView}>
         <Text style={style.todo}>TODO</Text>
-        <Text style={style.todoCounter}>{Apple}</Text>
+        <Text style={style.todoCounter}>{counter}</Text>
       </View>
       <ScrollView>
         {list.map((item) => {
           return (
-            <View>
-              <Text>{item}</Text>
+            <View style={style.todoContainer}>
+              <Text style={style.todoText}>{item}</Text>
+              <TouchableOpacity
+                style={style.close}
+                onPress={() => delItem(list.splice(list.indexOf(item),1))}>
+                <Text style={style.closeText}>X</Text>
+              </TouchableOpacity>
             </View>
           );
         })}
@@ -41,11 +47,27 @@ const App = (props) => {
         <TextInput
           style={style.inputContainer}
           defaultValue={text}
-          onChangeText={(text) => setText(text)}/>
+          onChangeText={(text) => setText(text)}
+          returnKeyType={ '' }
+          blurOnSubmit={true}
+          onSubmitEditing={() => text=="" ? console.warn("Please enter a todo") : addItem(list.push(text))}
+        />
         <TouchableOpacity
           style={style.addButton}
-          onPress={() => {addItem();setCounter(counter + 1);}}>
+          onPress={() => {text=="" ? console.warn("Please enter a todo") : 
+            addItem();
+            setCounter(counter + 1);
+            setText('');
+          }}>
           <Text style={style.textButton}>ADD TODO</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={style.addButton}
+          onPress={() => {
+            delItem(list.splice(0));
+            setCounter(0);
+          }}>
+          <Text style={style.textButton}>RESET</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -55,7 +77,7 @@ const App = (props) => {
 // onPress={() => {
 //   function1();
 //   function2();
-//  }}>   
+//  }}>
 
 export default App;
 
@@ -71,11 +93,35 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     margin: 5,
     alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'red',
   },
   todo: {fontSize: 40, fontWeight: 'bold', color: '#ffa726'},
   todoCounter: {fontSize: 25, fontWeight: 'bold', color: '#ffa726'},
+  todoContainer: {
+    backgroundColor: '#546e7a',
+    margin: 10,
+    borderRadius: 10,
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:"center",
+  },
+  todoText: {
+    color: 'white',
+    fontSize: 25,
+    paddingLeft: 10,
+    paddingVertical: 10,
+  },
+  close: {
+    alignSelf:"flex-start",
+    paddingRight: 5,
+    // position: 'absolute',
+    // top: -3,
+    // right: 3,
+  },
+  closeText: {
+    color:"white",
+    fontSize: 20,
+  },
   addContainer: {
     backgroundColor: '#b0bec5',
     alignItems: 'stretch',
