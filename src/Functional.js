@@ -2,17 +2,17 @@ import React, {useState, useEffect} from 'react';
 import {SafeAreaView, Text, View, Button, Alert} from 'react-native';
 
 const App = (props) => {
-  const [orderCount, setOrderCount] = useState(0);
+//   const [orderCount, setOrderCount] = useState(0);
 
 
-useEffect(() => {
-  Alert.alert("Welcome", "Clarusway")
-}, [])
+// useEffect(() => {
+//   Alert.alert("Welcome", "Clarusway")
+// }, [])
 
-useEffect(() => {
-  if(orderCount > 10)
-  Alert.alert("Clarusway", "10'dan fazla seçim yapamazsınız")
-}, [orderCount])
+// useEffect(() => {
+//   if(orderCount > 10)
+//   Alert.alert("Clarusway", "10'dan fazla seçim yapamazsınız")
+// }, [orderCount])
 
   // const [counter, setCounter] = useState(0);
 
