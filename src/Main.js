@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import InputPanel from './components/inputPanel'
 import Button from './components/Button';
 
 function sayHi() {
@@ -14,6 +15,8 @@ function sayHi() {
 }
 
 const App = () => {
+const [userName, setUserName] = useState("");
+
   return (
     <SafeAreaView>
       <View>
@@ -21,6 +24,7 @@ const App = () => {
         <Button sayingHi={sayHi} color="red" banner="Press Me!" />
         <Button sayingHi={() => {alert("second button")}} color="blue" banner="Press Me Too!" />
         <Button banner="Press Me without color!" />
+        <InputPanel sendText={myValue => (alert(myValue))}/>
       </View>
     </SafeAreaView>
   );
