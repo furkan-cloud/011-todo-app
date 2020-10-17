@@ -9,12 +9,18 @@ import {
 
 import Button from './components/Button';
 
+function sayHi() {
+  alert('Hi');
+}
+
 const App = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text style={myStyles.buttonText}>Hello World</Text>
-        <Button />
+        <Text style={{fontSize: 50}}>Hello World</Text>
+        <Button sayingHi={sayHi} color="red" banner="Press Me!" />
+        <Button sayingHi={() => {alert("second button")}} color="blue" banner="Press Me Too!" />
+        <Button banner="Press Me without color!" />
       </View>
     </SafeAreaView>
   );
